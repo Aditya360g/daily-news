@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Daily News - Your source for latest breaking news, politics, technology, sports, and entertainment updates.">
+    <meta property="og:title" content="Daily News - Latest Breaking News">
+    <meta property="og:description" content="Stay updated with the latest news from around the world.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https:;">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Upload Article - Daily News</title>
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 25%, #0a1a1a 50%, #1a1a0a 75%, #0a0a0a 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        main {
+            flex: 1;
+            padding: 1rem;
+        }
+        
+        .upload-container {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem auto;
+            width: 90%;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+        
+        /* Mobile Styles */
+        @media (max-width: 480px) {
+            .upload-container {
+                width: 95%;
+                padding: 1rem;
+                margin: 0.5rem auto;
+                border-radius: 15px;
+            }
+            
+            .upload-container h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.7rem !important;
+                font-size: 0.9rem !important;
+            }
+            
+            .submit-btn {
+                padding: 0.8rem !important;
+                font-size: 1rem !important;
+            }
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .upload-container {
+                width: 92%;
+                padding: 1.5rem;
+                max-width: 600px;
+            }
+            
+            .upload-container h1 {
+                font-size: 2rem !important;
+            }
+        }
+    </style>
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ffff;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(var(--bg-dark), 0.6);
+            border: 2px solid rgba(var(--primary-rgb), 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .image-upload {
+            border: 2px dashed rgba(0, 255, 255, 0.3);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload:hover {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+        
+        .image-preview {
+            max-width: 300px;
+            max-height: 200px;
+            margin: 1rem auto;
+            border-radius: 8px;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            animation: slideIn 0.4s ease 0.7s both;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 0, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" aria-label="Daily News Home">Daily News</a>
+                <span id="visitorCounter" class="visitor-badge">Visitors: 0</span>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search breaking news..." autocomplete="off">
+                <button type="button" id="searchBtn">Search</button>
+            </div>
+        </nav>
+        <div class="categories">
+            <button type="button" class="cat-btn" data-category="all">All</button>
+            <button type="button" class="cat-btn" data-category="politics">Politics</button>
+            <button type="button" class="cat-btn" data-category="technology">Technology</button>
+            <button type="button" class="cat-btn" data-category="sports">Sports</button>
+            <button type="button" class="cat-btn" data-category="entertainment">Entertainment</button>
+            <button type="button" class="cat-btn" id="myArticlesBtn">My Articles</button>
+            <button type="button" class="reload-btn" id="reloadBtn" title="Reload Page">Reload</button>
+            <button type="button" class="reload-btn" id="logoutBtn" style="background: linear-gradient(45deg, #00ff00, #00cc00); color: #000;">Logout</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="upload-container">
+            <h1 style="text-align: center; color: #00ffff; margin-bottom: 2rem; font-size: 2.5rem; animation: fadeIn 0.6s ease;">Upload New Article</h1>
+            
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="title">Article Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select Category</option>
+                        <option value="politics">Politics</option>
+                        <option value="technology">Technology</option>
+                        <option value="sports">Sports</option>
+                        <option value="entertainment">Entertainment</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="author">Author Name</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="excerpt">Article Excerpt</label>
+                    <textarea id="excerpt" name="excerpt" placeholder="Brief summary of the article..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="content">Full Article Content</label>
+                    <textarea id="content" name="content" placeholder="Write your full article here..." required style="min-height: 200px;"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Article Image</label>
+                    <div class="image-upload" onclick="document.getElementById('imageInput').click()">
+                        <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="previewImage(this)">
+                        <div id="uploadText">
+                            <p>📷 Click to upload image</p>
+                            <p style="font-size: 0.9rem; color: #888;">Supports JPG, PNG, GIF</p>
+                        </div>
+                        <img id="imagePreview" class="image-preview" style="display: none;">
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">Publish Article</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Daily News. All rights reserved.</p>
+        <p style="margin-top: 1rem; color: #00ffff; font-weight: bold;">Website developed by ADITYA SHARMA with the use of AI</p>
+        <p style="margin-top: 0.5rem;">Contact: <a href="mailto:adityasharma100213@gmail.com" style="color: #ffff00; text-decoration: underline; font-weight: bold;">adityasharma100213@gmail.com</a></p>
+    </footer>
+
+    <script src="news-data.js?v=1.0.1"></script>
+    <script src="api-config.js?v=1.0.1"></script>
+    <script src="app.js?v=1.0.1"></script>
+    <script>
+        if (!localStorage.getItem('loggedIn')) {
+            window.location.href = 'login.html';
+        }
+        
+        // Initialize background animations on upload page
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof addTouchSupport === 'function') {
+                addTouchSupport();
+            }
+        });
+        
+        function previewImage(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    const uploadText = document.getElementById('uploadText');
+                    
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    uploadText.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            const imageFile = document.getElementById('imageInput').files[0];
+            
+            // Get form data
+            const articleData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                author: document.getElementById('author').value,
+                excerpt: document.getElementById('excerpt').value,
+                content: document.getElementById('content').value,
+                date: new Date().toISOString(),
+                id: Date.now()
+            };
+            
+            if (imageFile) {
+                // Convert image to base64 for local storage
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    articleData.image = e.target.result;
+                    saveArticle(articleData);
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                // Use default image if no image uploaded
+                articleData.image = 'https://via.placeholder.com/400x250/333/fff?text=No+Image';
+                saveArticle(articleData);
+            }
+        });
+        
+        function saveArticle(articleData) {
+            // Get existing articles from localStorage
+            let existingArticles = JSON.parse(localStorage.getItem('newsArticles') || '[]');
+            
+            // Add new article
+            existingArticles.unshift(articleData);
+            
+            // Save back to localStorage
+            localStorage.setItem('newsArticles', JSON.stringify(existingArticles));
+            
+            // Show success message with animation
+            const container = document.querySelector('.upload-container');
+            container.innerHTML = `
+                <div class="success-message" style="text-align: center; animation: fadeIn 0.5s ease;">
+                    <h2 style="color: #00ff00; font-size: 2rem; margin-bottom: 1rem;">✅ Success!</h2>
+                    <p style="color: var(--text-light); font-size: 1.2rem; margin-bottom: 2rem;">Article published successfully!</p>
+                    <button onclick="window.location.href='index.html'" class="home-btn" style="padding: 1rem 2rem; background: #ffff00; color: #000; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: bold; cursor: pointer;">Go to Home</button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

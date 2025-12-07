@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Daily News - Your source for latest breaking news, politics, technology, sports, and entertainment updates.">
+    <meta property="og:title" content="Daily News - Latest Breaking News">
+    <meta property="og:description" content="Stay updated with the latest news from around the world.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; connect-src 'self' https:;">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Article - Daily News</title>
+    <link rel="stylesheet" href="styles.css?v=1.0.1">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html" aria-label="Daily News Home">Daily News</a>
+                <span id="visitorCounter" class="visitor-badge">Visitors: 0</span>
+            </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search breaking news..." autocomplete="off">
+                <button type="button" id="searchBtn">Search</button>
+            </div>
+        </nav>
+        <div class="categories">
+            <button type="button" class="cat-btn" data-category="all">All</button>
+            <button type="button" class="cat-btn" data-category="politics">Politics</button>
+            <button type="button" class="cat-btn" data-category="technology">Technology</button>
+            <button type="button" class="cat-btn" data-category="sports">Sports</button>
+            <button type="button" class="cat-btn" data-category="entertainment">Entertainment</button>
+            <button type="button" class="cat-btn" id="myArticlesBtn">My Articles</button>
+            <button type="button" class="reload-btn" id="reloadBtn" title="Reload Page">Reload</button>
+            <button type="button" class="reload-btn" id="logoutBtn" style="background: linear-gradient(45deg, #00ff00, #00cc00); color: #000;">Logout</button>
+        </div>
+    </header>
+
+    <main>
+        <article class="article-detail" id="articleDetail"></article>
+        <section class="related-section">
+            <h2>Related News</h2>
+            <div class="news-grid" id="relatedNews"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Daily News. All rights reserved.</p>
+        <p style="margin-top: 1rem; color: #00ffff; font-weight: bold;">Website developed by ADITYA SHARMA with the use of AI</p>
+        <p style="margin-top: 0.5rem;">Contact: <a href="mailto:adityasharma100213@gmail.com" style="color: #ffff00; text-decoration: underline; font-weight: bold;">adityasharma100213@gmail.com</a></p>
+    </footer>
+
+    <script src="news-data.js?v=1.0.1"></script>
+    <script src="api-config.js?v=1.0.1"></script>
+    <script src="app.js?v=1.0.1"></script>
+    <script>
+        if (!localStorage.getItem('loggedIn')) {
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
